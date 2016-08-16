@@ -80,5 +80,9 @@ Window.loop do
 	Sprite.clean(s)
 	Sprite.clean(enemy_bullets)
 	#debug
-	Window.draw_font(0, 0, Window.real_fps.to_s, font)
+	Window.draw_font(0, 0, "fps : " + Window.real_fps.to_s, font)
+	Window.draw_font(0, 15, "bullet : " + bullets.size.to_s, font)
+	Window.draw_font(0, 30, "enemy : " + enemes.size.to_s, font)
+	Window.draw_font(0, 45, "enemy_bullet : " + enemy_bullets.size.to_s, font)
+	Window.draw_font(0, 60, "Player_pos : " + s.x.to_s + ", " + s.y.to_s, font)
 end
