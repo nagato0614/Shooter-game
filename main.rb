@@ -12,6 +12,7 @@ ENEMY_SHOT_TIMING = 100			#敵機が弾を撃つタイミング
 ENEMY_BULLET_ANGLE = PI / 4.0   #敵が弾を撃つ角度
 Window.resize(WIDTH, HEIGHT)	#ウィンドウサイズ設定
 Window.windowed = true				#フルスクリーン
+Window.fps = 30
 font = Font.new(15)						#デバッグ用のフォント設定
 
 
