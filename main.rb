@@ -40,12 +40,14 @@ Window.loop do
 		#敵機の発射判定
 		if (e.y >= ENEMY_SHOT_TIMING && e.isShot)
 			e.isShot = false
-			enemy_bullets << Enemy_Bullet.new(e.x, e.y, s.x, s.y)
+			8.times do |i|
+				enemy_bullets << Enemy_Bullet.new(e.x, e.y, i * PI / 4.0)
+			end
 		end
 
 		if (s === e)
 			s.isShoot = false
-			s.vanish
+			#s.vanish		#デバッグのために一時的にコメントアウト
 		end
 	end
 
