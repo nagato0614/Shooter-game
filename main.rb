@@ -9,9 +9,11 @@ load 'Enemy_bullet.rb'
 WIDTH = 640		#画面の横幅
 HEIGHT = 480		#画面の縦幅
 ENEMY_SHOT_TIMING = 100			#敵機が弾を撃つタイミング
+ENEMY_BULLET_ANGLE = PI / 4.0   #敵が弾を撃つ角度
 Window.resize(WIDTH, HEIGHT)	#ウィンドウサイズ設定
 Window.windowed = true				#フルスクリーン
 font = Font.new(15)						#デバッグ用のフォント設定
+
 
 #プレイヤー機を設置する
 s = Player.new(Window.width / 2, Window.height / 4 * 3)
@@ -41,16 +43,17 @@ Window.loop do
 		if (e.y >= ENEMY_SHOT_TIMING && e.isShot)
 			e.isShot = false
 			8.times do |i|
-				enemy_bullets << Enemy_Bullet.new(e.x, e.y, i * PI / 4.0)
+				enemy_bullets << Enemy_Bullet.new(e.x, e.y, i * ENEMY_BULLET_ANGLE)
 			end
 		end
 
 		if (s === e)
 			s.isShoot = false
-			#s.vanish		#デバッグのために一時的にコメントアウト
+			s.vanish
 		end
 	end
 
+	#自機が撃った弾と敵機とのあたり判定
 	bullets.each do |b|
 		enemes.each do |e|
 			if (b === e)
@@ -60,6 +63,15 @@ Window.loop do
 			end
 		end
 	end
+
+	#敵が撃った弾と自機のあたり判定
+	enemy_bullets.each do |e|
+		if (s === e)
+			s.isShot = false
+			s.vanish
+		end
+	end
+
 
 	#update
 	s.update
