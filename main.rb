@@ -23,6 +23,7 @@ enemes = []
 enemy_expl = []
 cnt = 0
 enemy_bullets = []
+object = []
 
 Window.loop do 
 
@@ -35,7 +36,7 @@ Window.loop do
 
 	cnt += 1
 	if ((cnt = cnt % Enemy_mini::ENEMY_SPAWN_TIMING) == 0)
-		enemes << Enemy_mini.new
+		object << Enemy_mini.new
 	end
 
 	#自機と敵機のあたり判定
@@ -73,27 +74,32 @@ Window.loop do
 		end
 	end
 
+	Sprite.check(object, object)
 
 	#update
 	s.update
 	Sprite.update(bullets)
-	Sprite.update(enemes)
+	#Sprite.update(enemes)
 	Sprite.update(enemy_expl)
 	Sprite.update(enemy_bullets)
+	Sprite.update(object)
 
 	#draw
 	Sprite.draw(bullets)
 	Sprite.draw(s)
-	Sprite.draw(enemes)
+	#Sprite.draw(enemes)
 	Sprite.draw(enemy_expl)
 	Sprite.draw(enemy_bullets)
+	Sprite.draw(object)
 
 	#clean
 	Sprite.clean(enemy_expl)
 	Sprite.clean(bullets)
-	Sprite.clean(enemes)
+	#Sprite.clean(enemes)
 	Sprite.clean(s)
 	Sprite.clean(enemy_bullets)
+	Sprite.clean(object)
+
 	#debug
 	Window.draw_font(0, 0, "fps : " + Window.real_fps.to_s, font)
 	Window.draw_font(0, 15, "bullet : " + bullets.size.to_s, font)
