@@ -23,4 +23,10 @@ class Enemy_Bullet < Sprite
 		self.x += SPEED * Math.cos(self.angle)
 		self.y += SPEED * Math.sin(self.angle)
 	end
+
+	def hit(obj)
+		if obj.is_a?(Player)
+			self.vanish
+		end
+	end
 end
