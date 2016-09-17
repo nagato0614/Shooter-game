@@ -29,7 +29,7 @@ class Enemy_mini < Sprite
 
 	def loadimage
 		#画像の読み込み
-		@@images = Image.load_tiles('enemy_mini.png', 1, 3)
+		@@images = Image.load_tiles('images/enemy_mini.png', 1, 3)
 		self.image_num = 0
 		self.image = @@images[self.image_num]
 	end

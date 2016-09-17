@@ -5,7 +5,7 @@ class Enemy_Bullet < Sprite
 	#弾が進むスピード
 	SPEED = 1
 
-	@@images = Image.load_tiles('enemy_bullet.png', 1, 4)
+	@@images = Image.load_tiles('images/enemy_bullet.png', 1, 4)
 
 	attr_accessor :image_num
 	attr_accessor :angle  #発射角.x軸の正方向が0となる。[ラジアン]

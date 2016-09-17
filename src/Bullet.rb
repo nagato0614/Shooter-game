@@ -4,7 +4,7 @@ class Bullet < Sprite
 
 	def initialize(a, b)
 		super
-		self.image = Image.load('bullet.png')
+		self.image = Image.load('images/bullet.png')
 		self.x = a
 		self.y = b
 	end

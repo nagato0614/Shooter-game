@@ -30,7 +30,7 @@ class Player < Sprite
 	end
 
 	def loadimage
-		baseimage = Image.load('Player0102.png')
+		baseimage = Image.load('images/Player0102.png')
 		self.image = baseimage.slice(0, 0, PLAYER_WIDTH, PLAYER_HEIGHT)
 	end
 

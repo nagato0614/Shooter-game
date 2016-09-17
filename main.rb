@@ -1,9 +1,9 @@
 require 'dxruby'
-load 'Player.rb'
-load 'Bullet.rb'
-load 'Enemy_mini.rb'
-load 'Expl.rb'
-load 'Enemy_bullet.rb'
+require_relative 'src/Player.rb'
+require_relative 'src/Bullet.rb'
+require_relative 'src/Enemy_mini.rb'
+require_relative 'src/Expl.rb'
+require_relative 'src/Enemy_bullet.rb'
 
 #初期設定
 WIDTH = 640		#画面の横幅
@@ -68,7 +68,7 @@ Window.loop do
 	#敵が撃った弾と自機のあたり判定
 	enemy_bullets.each do |e|
 		if (s === e)
-			s.isShot = false
+			s.isShoot = false
 			s.vanish
 		end
 	end

@@ -20,7 +20,7 @@ class Expl < Sprite
 	end
 
 	def loadimage
-		@@images = Image.load_tiles('Explode.png', 1, 4)
+		@@images = Image.load_tiles('images/Explode.png', 1, 4)
 		self.image_num = 0
 		self.image = @@images[0]
 	end
