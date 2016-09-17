@@ -13,4 +13,10 @@ class Bullet < Sprite
 		self.y -= SPEED
 		self.vanish if self.y < -5
 	end
+
+	def hit(obj)
+		if obj.is_a?(Enemy_mini)
+			is.vanish
+		end
+	end
 end
