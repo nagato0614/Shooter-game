@@ -27,12 +27,24 @@ module Stage1
 			#敵機を生成する
 			spown_enemy
 
+			#敵が弾を発射する
+			shoot
+
 			#オブジェクトの描画処理関係
 			Sprite.update(self.object)
 			Sprite.check(self.object, self.object)
 			Sprite.clean(self.object)
 			Sprite.draw(self.object)
 
+		end
+
+		#敵が弾を発射する
+		def shoot
+			self.object.each do |obj|
+				if obj.is_a?(Enemy_mini)
+					self.object << obj.shoot_bullet
+				end
+			end
 		end
 
 		#敵機を生成する関数

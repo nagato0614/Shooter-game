@@ -7,7 +7,7 @@ class Enemy_mini < Sprite
 	ENEMY_SPAWN_TIMING = 40
 
 	#敵機が進むスピード
-	ENEMY_SPEED = 3
+	ENEMY_SPEED = 1.5
 
 	#敵機の画像
 	@@images
@@ -42,6 +42,16 @@ class Enemy_mini < Sprite
 				self.image_num = 0
 			end
 			self.image = @@images[self.image_num]
+	end
+
+	#弾を発射するメソッド
+	def shoot_bullet
+		bullets = []
+		if self.y >= 100 && self.isShot
+			bullets << Enemy_Bullet.new(self.x, self.y, 90.0)
+			self.isShot = false
+		end
+		return bullets
 	end
 
 	def update
