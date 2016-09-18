@@ -1,26 +1,8 @@
-Name
+シューティングゲーム
 ====
 
-Overview
-
-## Description
-
-## Demo
-
-## VS. 
-
-## Requirement
-
-## Usage
-
-## Install
-
-## Contribution
-
-## Licence
-
-[MIT](https://github.com/tcnksm/tool/blob/master/LICENCE)
+dxrubyを用いて作っているゲーム
+rubyを使う練習のため作っている
 
 ## Author
-
-[tcnksm](https://github.com/tcnksm)
+nagato0614
