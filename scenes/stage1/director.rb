@@ -8,7 +8,7 @@ module Stage1
 	class Director
 
 		ENEMY_SPOWN_TIMMING = 15
-		
+
 		#これに生成するオブジェクトを格納していく
 		attr_accessor :object
 
@@ -29,6 +29,7 @@ module Stage1
 
 			#オブジェクトの描画処理関係
 			Sprite.update(self.object)
+			Sprite.check(self.object, self.object)
 			Sprite.clean(self.object)
 			Sprite.draw(self.object)
 
