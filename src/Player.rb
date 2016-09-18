@@ -58,4 +58,9 @@ class Player < Sprite
 
 	end
 
+	def hit(obj)
+		if obj.is_a?(Enemy_bullet) || obj.is_a?(Enemy)
+			self.vanish
+		end
+	end
 end

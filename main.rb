@@ -1,103 +1,15 @@
 require 'dxruby'
-require_relative 'src/Player.rb'
-require_relative 'src/Bullet.rb'
-require_relative 'src/Enemy_mini.rb'
-require_relative 'src/Expl.rb'
-require_relative 'src/Enemy_bullet.rb'
+require_relative 'scene'
+require_relative 'load_scenes'
 
 #初期設定
-WIDTH = 640		#画面の横幅
-HEIGHT = 480		#画面の縦幅
-ENEMY_SHOT_TIMING = 100			#敵機が弾を撃つタイミング
-ENEMY_BULLET_ANGLE = PI / 4.0   #敵が弾を撃つ角度
-Window.resize(WIDTH, HEIGHT)	#ウィンドウサイズ設定
-Window.windowed = true				#フルスクリーン
-Window.fps = 30
-font = Font.new(15)						#デバッグ用のフォント設定
+Window.width = 800
+Window.height = 600
 
-
-#プレイヤー機を設置する
-s = Player.new(Window.width / 2, Window.height / 4 * 3)
-bullets = []
-enemes = []
-enemy_expl = []
-cnt = 0
-enemy_bullets = []
+Scene.set_current_scene(:title)
 
 Window.loop do 
+	break if Input.keyPush?(K_ESCAPE)
 
-	#弾が発射される（タイミングはメソッド内で定義されている)
-	bullets << s.shoot
-
-	if (Input.key_push?(K_ESCAPE))
-		exit
-	end
-
-	cnt += 1
-	if ((cnt = cnt % Enemy_mini::ENEMY_SPAWN_TIMING) == 0)
-		enemes << Enemy_mini.new
-	end
-
-	#自機と敵機のあたり判定
-	enemes.each do |e|
-		#敵機の発射判定
-		if (e.y >= ENEMY_SHOT_TIMING && e.isShot)
-			e.isShot = false
-			8.times do |i|
-				enemy_bullets << Enemy_Bullet.new(e.x, e.y, i * ENEMY_BULLET_ANGLE)
-			end
-		end
-
-		if (s === e)
-			s.isShoot = false
-			s.vanish
-		end
-	end
-
-	#自機が撃った弾と敵機とのあたり判定
-	bullets.each do |b|
-		enemes.each do |e|
-			if (b === e)
-				enemy_expl << Expl.new(e.x, e.y)
-				e.vanish
-				b.vanish
-			end
-		end
-	end
-
-	#敵が撃った弾と自機のあたり判定
-	enemy_bullets.each do |e|
-		if (s === e)
-			s.isShoot = false
-			s.vanish
-		end
-	end
-
-
-	#update
-	s.update
-	Sprite.update(bullets)
-	Sprite.update(enemes)
-	Sprite.update(enemy_expl)
-	Sprite.update(enemy_bullets)
-
-	#draw
-	Sprite.draw(bullets)
-	Sprite.draw(s)
-	Sprite.draw(enemes)
-	Sprite.draw(enemy_expl)
-	Sprite.draw(enemy_bullets)
-
-	#clean
-	Sprite.clean(enemy_expl)
-	Sprite.clean(bullets)
-	Sprite.clean(enemes)
-	Sprite.clean(s)
-	Sprite.clean(enemy_bullets)
-	#debug
-	Window.draw_font(0, 0, "fps : " + Window.real_fps.to_s, font)
-	Window.draw_font(0, 15, "bullet : " + bullets.size.to_s, font)
-	Window.draw_font(0, 30, "enemy : " + enemes.size.to_s, font)
-	Window.draw_font(0, 45, "enemy_bullet : " + enemy_bullets.size.to_s, font)
-	Window.draw_font(0, 60, "Player_pos : " + s.x.to_s + ", " + s.y.to_s, font)
+	Scene.play_scene
 end

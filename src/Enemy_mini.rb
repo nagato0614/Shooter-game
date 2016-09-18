@@ -49,4 +49,11 @@ class Enemy_mini < Sprite
 		self.y += ENEMY_SPEED
 		self.vanish if self.y > HEIGHT
 	end
+
+	def hit(obj)
+		if obj.is_a?(Player)
+			self.vanish
+		end
+	end
+
 end
