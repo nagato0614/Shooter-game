@@ -9,17 +9,28 @@ module Stage1
 
 		ENEMY_SPOWN_TIMMING = 15
 
+		#マップサイズ（仮）マップクラスを作成する時のこの値をつかう
+		MAP_HEIGHT = 1800
+		MAP_WIDTH = 800
+
 		#これに生成するオブジェクトを格納していく
 		attr_accessor :object
 
 		#敵機を出現するタイミングを調節する
 		attr_accessor :enemy_cnt
 
+		#レンダーターゲットを格納する。これでマップの描写を行う
+		attr_accessor :render
+
 		def initialize
 			self.object = []
 			self.enemy_cnt = 0
 
-			object << Player.new(Window.width / 2, Window.height * 2 / 3)
+			#RenderTargetの生成
+			self.render = RenderTarget.new(MAP_WIDTH, MAP_HEIGHT)
+
+			self.object << Player.new(Window.width / 2, Window.height * 2 / 3)
+			self.object[0].target = self.render
 		end
 
 		def play
@@ -36,6 +47,7 @@ module Stage1
 			Sprite.clean(self.object)
 			Sprite.draw(self.object)
 
+			Window.draw(0, 0, self.render)
 		end
 
 		#敵が弾を発射する
@@ -43,6 +55,9 @@ module Stage1
 			self.object.each do |obj|
 				if obj.is_a?(Enemy_mini)
 					self.object << obj.shoot_bullet
+					self.object.last.each do |bul|
+						bul.target = self.render
+					end
 				end
 			end
 		end
@@ -51,6 +66,7 @@ module Stage1
 		def spown_enemy
 			if self.enemy_cnt % ENEMY_SPOWN_TIMMING == 0
 				self.object << Enemy_mini.new
+				self.object.last.target = self.render
 			end
 
 			self.enemy_cnt += 1
