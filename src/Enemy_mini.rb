@@ -23,7 +23,7 @@ class Enemy_mini < Sprite
 		self.isShot = true
 		self.loadimage
 		#敵機を画面の中心付近に出現させる
-		self.x = rand(WIDTH - 48 / 2)
+		self.x = rand(Window.width - 48 / 2)
 		self.y = Y
 	end
 
@@ -47,7 +47,7 @@ class Enemy_mini < Sprite
 	def update
 		self.change_image
 		self.y += ENEMY_SPEED
-		self.vanish if self.y > HEIGHT
+		self.vanish if self.y > Window.height
 	end
 
 	def hit(obj)
