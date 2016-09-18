@@ -14,6 +14,7 @@ module Stage1
 			self.object = []
 
 			object << Player.new(Window.width / 2, Window.height * 2 / 3)
+			p [Window.width / 2, Window.height * 2 / 3]
 		end
 
 		def play
