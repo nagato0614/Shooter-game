@@ -4,6 +4,7 @@ require 'dxruby'
 Window.width = 800
 Window.height = 600
 
+require_relative 'src/map'
 require_relative 'scene'
 require_relative 'load_scenes'
 

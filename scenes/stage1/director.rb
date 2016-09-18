@@ -3,15 +3,12 @@ require_relative '../../src/Bullet'
 require_relative '../../src/Enemy_mini'
 require_relative '../../src/Expl'
 require_relative '../../src/Enemy_bullet'
+require_relative '../../src/map'
 
 module Stage1
 	class Director
 
 		ENEMY_SPOWN_TIMMING = 15
-
-		#マップサイズ（仮）マップクラスを作成する時のこの値をつかう
-		MAP_HEIGHT = 1800
-		MAP_WIDTH = 800
 
 		#これに生成するオブジェクトを格納していく
 		attr_accessor :object
@@ -22,12 +19,18 @@ module Stage1
 		#レンダーターゲットを格納する。これでマップの描写を行う
 		attr_accessor :render
 
+		#背景を保管する
+		attr_accessor :map
+
 		def initialize
 			self.object = []
 			self.enemy_cnt = 0
 
+			#ステージ１の背景を読み込む
+			self.map = Map.new(1)
+
 			#RenderTargetの生成
-			self.render = RenderTarget.new(MAP_WIDTH, MAP_HEIGHT)
+			self.render = RenderTarget.new(self.map.width, self.map.height)
 
 			self.object << Player.new(Window.width / 2, Window.height * 2 / 3)
 			self.object[0].target = self.render
@@ -41,12 +44,16 @@ module Stage1
 			#敵が弾を発射する
 			shoot
 
+			#背景を描く
+			self.render.draw(0, 0, self.map.map[0])
+
 			#オブジェクトの描画処理関係
 			Sprite.update(self.object)
 			Sprite.check(self.object, self.object)
 			Sprite.clean(self.object)
 			Sprite.draw(self.object)
 
+			#表示する範囲をせっていする
 			Window.draw(0, 0, self.render)
 		end
 
