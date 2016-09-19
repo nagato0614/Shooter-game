@@ -63,6 +63,8 @@ class Enemy_mini < Sprite
 	def hit(obj)
 		if obj.is_a?(Player)
 			self.vanish
+		elsif obj.is_a?(Bullet)
+			self.vanish
 		end
 	end
 

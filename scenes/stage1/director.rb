@@ -28,7 +28,6 @@ module Stage1
 		attr_accessor :map
 
 		def initialize
-			self.object = []
 			self.enemy_cnt = 0
 
 			#ステージ１の背景を読み込む
@@ -37,17 +36,21 @@ module Stage1
 			#RenderTargetの生成
 			self.render = RenderTarget.new(self.map.width, self.map.height)
 
+			self.object = []
 			self.object << Player.new(Window.width / 2, Window.height * 2 / 3)
-			self.object[0].target = self.render
+			self.object.first.target = self.render
 		end
 
 		def play
 
 			#敵機を生成する
-			spown_enemy
+			self.spown_enemy
 
 			#敵が弾を発射する
-			shoot
+			self.shoot_enemy
+
+			#自機が弾を発射する
+			self.shoot_player
 
 			#背景をスクロールさせる
 			self.map.scroll
@@ -66,7 +69,26 @@ module Stage1
 		end
 
 		#敵が弾を発射する
-		def shoot
+		def shoot_enemy
+			self.object.each do |obj|
+				if obj.is_a?(Enemy_mini)
+					self.object << obj.shoot_bullet
+					self.object.last.each do |bul|
+						bul.target = self.render
+					end
+				end
+			end
+		end
+
+		#自機が弾を発射する
+		def shoot_player
+			if self.object.first.is_a?(Player)
+				bul = self.object.first.shoot
+				if bul.is_a?(Bullet)
+					self.object << bul
+					self.object.last.target = self.render
+				end
+			end
 		end
 
 		#敵機を生成する関数

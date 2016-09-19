@@ -44,11 +44,9 @@ class Player < Sprite
 		@cnt += 1
 		if ((self.cnt = self.cnt % SHOOT_FLAME) == 0 && @@isShoot)
 			return Bullet.new(self.x + MOVE_CENTER, self.y)
-		else 
-			return nil
 		end
 	end
-
+	
 	def isShoot=(value)
 		@@isShoot = value
 	end
@@ -60,6 +58,7 @@ class Player < Sprite
 
 	def hit(obj)
 		if obj.is_a?(Enemy_Bullet) || obj.is_a?(Enemy_mini)
+			@@isShoot = false
 			self.vanish
 		end
 	end

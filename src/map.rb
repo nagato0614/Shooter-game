@@ -19,7 +19,6 @@ class Map
 
 		#背景の座標を初期化
 		self.background_y = -map.first.height + Window.height
-		p [map.first.height, Window.height]
 	end
 
 	#背景を一度に読み込む関数
