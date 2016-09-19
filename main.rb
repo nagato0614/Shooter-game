@@ -1,4 +1,7 @@
+require 'bundler'
+Bundler.require
 require 'dxruby'
+
 require_relative 'scene'
 require_relative 'load_scenes'
 
