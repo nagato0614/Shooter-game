@@ -8,6 +8,11 @@ require_relative '../../src/map'
 module Stage1
 	class Director
 
+		#このdirectorが扱うステージ
+		STAGE = 1
+
+		#敵が出現する間隔
+		#まだ敵が動く規則を決めていないのでランダム
 		ENEMY_SPOWN_TIMMING = 15
 
 		#これに生成するオブジェクトを格納していく
@@ -27,7 +32,7 @@ module Stage1
 			self.enemy_cnt = 0
 
 			#ステージ１の背景を読み込む
-			self.map = Map.new(1)
+			self.map = Map.new(STAGE)
 
 			#RenderTargetの生成
 			self.render = RenderTarget.new(self.map.width, self.map.height)
@@ -44,8 +49,11 @@ module Stage1
 			#敵が弾を発射する
 			shoot
 
-			#背景を描く
-			self.render.draw(0, 0, self.map.map[0])
+			#背景をスクロールさせる
+			self.map.scroll
+
+			#背景を描写する
+			self.render.draw(0, self.map.background_y, self.map.map[STAGE - 1])
 
 			#オブジェクトの描画処理関係
 			Sprite.update(self.object)
@@ -59,14 +67,6 @@ module Stage1
 
 		#敵が弾を発射する
 		def shoot
-			self.object.each do |obj|
-				if obj.is_a?(Enemy_mini)
-					self.object << obj.shoot_bullet
-					self.object.last.each do |bul|
-						bul.target = self.render
-					end
-				end
-			end
 		end
 
 		#敵機を生成する関数
