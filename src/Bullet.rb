@@ -5,6 +5,7 @@ class Bullet < Sprite
 	def initialize(a, b)
 		super
 		self.image = Image.load('images/bullet.png')
+		self.image.set_color_key(C_WHITE)
 		self.x = a
 		self.y = b
 	end
