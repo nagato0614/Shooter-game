@@ -1,4 +1,4 @@
-class Bullet < Sprite
+class Bullet < PlayerBase
 
 	SPEED = 5
 
@@ -12,7 +12,8 @@ class Bullet < Sprite
 
 	def update
 		self.y -= SPEED
-		self.vanish if self.y < -5
+
+		self.delete
 	end
 
 	def hit(obj)
@@ -20,4 +21,5 @@ class Bullet < Sprite
 			self.vanish
 		end
 	end
+
 end

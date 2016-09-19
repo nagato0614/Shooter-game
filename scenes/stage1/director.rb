@@ -8,6 +8,8 @@ require_relative '../../src/map'
 module Stage1
 	class Director
 
+		@@font = Font.new(15, "MS 明朝")
+
 		#このdirectorが扱うステージ
 		STAGE = 1
 
@@ -59,13 +61,14 @@ module Stage1
 			self.render.draw(0, self.map.background_y, self.map.map[STAGE - 1])
 
 			#オブジェクトの描画処理関係
+			Sprite.clean(self.object)
 			Sprite.update(self.object)
 			Sprite.check(self.object, self.object)
-			Sprite.clean(self.object)
 			Sprite.draw(self.object)
 
 			#表示する範囲をせっていする
 			Window.draw(0, 0, self.render)
+			p self.object.length
 		end
 
 		#敵が弾を発射する
@@ -73,9 +76,7 @@ module Stage1
 			self.object.each do |obj|
 				if obj.is_a?(Enemy_mini)
 					self.object << obj.shoot_bullet
-					self.object.last.each do |bul|
-						bul.target = self.render
-					end
+					self.object.last.target = self.render if self.object.last != nil
 				end
 			end
 		end

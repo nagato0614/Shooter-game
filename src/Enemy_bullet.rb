@@ -1,6 +1,6 @@
 include Math
 #弾がプレイヤーを狙って進む
-class Enemy_Bullet < Sprite
+class Enemy_Bullet < PlayerBase
 
 	#弾が進むスピード
 	SPEED = 3
@@ -22,6 +22,8 @@ class Enemy_Bullet < Sprite
 	def update
 		self.x += SPEED * Math.cos(self.angle)
 		self.y += SPEED * Math.sin(self.angle)
+
+		self.delete
 	end
 
 	def hit(obj)

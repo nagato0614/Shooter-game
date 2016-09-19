@@ -1,7 +1,7 @@
-class Enemy_mini < Sprite
+class Enemy_mini < PlayerBase
 
 	#敵機の出現するy座標
-	Y = -10
+	Y = 1
 
 	#敵機が出現するタイミング
 	ENEMY_SPAWN_TIMING = 40
@@ -46,18 +46,17 @@ class Enemy_mini < Sprite
 
 	#弾を発射するメソッド
 	def shoot_bullet
-		bullets = []
 		if self.y >= 100 && self.isShot
-			bullets << Enemy_Bullet.new(self.x, self.y, 90.0)
 			self.isShot = false
+			return Enemy_Bullet.new(self.x, self.y, 90.0)
 		end
-		return bullets
 	end
 
 	def update
 		self.change_image
 		self.y += ENEMY_SPEED
 		self.vanish if self.y > Window.height
+		self.delete
 	end
 
 	def hit(obj)
@@ -67,5 +66,4 @@ class Enemy_mini < Sprite
 			self.vanish
 		end
 	end
-
 end
