@@ -4,8 +4,16 @@ require 'dxruby'
 Window.width = 800
 Window.height = 600
 
+
 require_relative 'src/player_base'
+require_relative 'src/Player'
+require_relative 'src/Bullet'
+require_relative 'src/Enemy_mini'
+require_relative 'src/Expl'
+require_relative 'src/Enemy_bullet'
 require_relative 'src/map'
+require_relative 'src/map'
+require_relative 'src/enemy_move'
 require_relative 'scene'
 require_relative 'load_scenes'
 

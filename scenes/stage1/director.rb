@@ -1,6 +1,7 @@
 require_relative '../../src/Player'
 require_relative '../../src/Bullet'
 require_relative '../../src/Enemy_mini'
+require_relative '../../src/enemy_move'
 require_relative '../../src/Expl'
 require_relative '../../src/Enemy_bullet'
 require_relative '../../src/map'
@@ -29,6 +30,9 @@ module Stage1
 		#背景を保管する
 		attr_accessor :map
 
+		#敵機を制御するクラス
+		attr_accessor :enemy_move
+
 		def initialize
 			self.enemy_cnt = 0
 
@@ -41,15 +45,14 @@ module Stage1
 			self.object = []
 			self.object << Player.new(Window.width / 2, Window.height * 2 / 3)
 			self.object.first.target = self.render
+
+			self.enemy_move = Enemy_move.new
 		end
 
 		def play
 
 			#敵機を生成する
 			self.spown_enemy
-
-			#敵が弾を発射する
-			self.shoot_enemy
 
 			#自機が弾を発射する
 			self.shoot_player
@@ -66,18 +69,18 @@ module Stage1
 			Sprite.check(self.object, self.object)
 			Sprite.draw(self.object)
 
-			#表示する範囲をせっていする
+			#表示する範囲を設定する
 			Window.draw(0, 0, self.render)
-			p self.object.length
 		end
 
 		#敵が弾を発射する
-		def shoot_enemy
-			self.object.each do |obj|
-				if obj.is_a?(Enemy_mini)
-					self.object << obj.shoot_bullet
-					self.object.last.target = self.render if self.object.last != nil
+		def spown_enemy
+			buf = self.enemy_move.spown_enemy(self.map.background_y)
+			if buf != nil
+				buf.each do |obj|
+					obj.target = self.render
 				end
+				self.object << buf
 			end
 		end
 
@@ -90,17 +93,6 @@ module Stage1
 					self.object.last.target = self.render
 				end
 			end
-		end
-
-		#敵機を生成する関数
-		def spown_enemy
-			if self.enemy_cnt % ENEMY_SPOWN_TIMMING == 0
-				self.object << Enemy_mini.new
-				self.object.last.target = self.render
-			end
-
-			self.enemy_cnt += 1
-			self.enemy_cnt %= ENEMY_SPOWN_TIMMING
 		end
 	end
 end
