@@ -17,10 +17,11 @@ include Motion
 	ENEMY_SPAWN_TIMING = 40
 
 	#waveでの振幅と周期
-	AMPLITUDE = 25
-	SITA = 100
+	AMPLITUDE = 50
+	SITA = 30
 
-	#waveでの縦移動のカウント
+	#waveでの縦移動の基準となる座標
+	attr_accessor :wave_y
 	attr_accessor :wave_cnt
 
 	#敵機が進むスピード
@@ -42,8 +43,9 @@ include Motion
 		self.loadimage
 		self.isShot = true
 		self.x = x
+		self.wave_cnt = 0 - x
 		self.y = y
-		self.wave_cnt = 0.0 - y
+		self.wave_y = y
 		self.motion = motion
 		self.enemy_speed = speed
 		self.visible = true
@@ -95,10 +97,8 @@ include Motion
 
 	def wave_right
 		self.x += self.enemy_speed
-		if (self.x / self.enemy_speed) % 1 == 0
-			self.y += Math.sin(self.wave_cnt / SITA) * AMPLITUDE
-			self.wave_cnt += 1
-		end
+		self.y = self.wave_y - Math.cos(self.wave_cnt / SITA) * AMPLITUDE
+		self.wave_cnt -= 0.5
 	end
 
 end
