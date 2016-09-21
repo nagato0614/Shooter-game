@@ -1,22 +1,25 @@
-class Bullet < Sprite
+class Bullet < PlayerBase
 
 	SPEED = 5
 
 	def initialize(a, b)
 		super
 		self.image = Image.load('images/bullet.png')
+		self.image.set_color_key(C_WHITE)
 		self.x = a
 		self.y = b
 	end
 
 	def update
 		self.y -= SPEED
-		self.vanish if self.y < -5
+
+		self.delete
 	end
 
 	def hit(obj)
 		if obj.is_a?(Enemy_mini)
-			is.vanish
+			self.vanish
 		end
 	end
+
 end

@@ -35,8 +35,22 @@ class Player < Sprite
 	end
 
 	def update
-		self.x += Input.x * @@dx
-		self.y += Input.y * @@dy
+		self.move
+	end
+
+	def move
+		dx, dy = 0, 0
+		
+		#左右移動に関して
+		dx = -@@dx if Input.key_down?(K_LEFT) && (self.x >= @@dx)
+		dx = @@dx if Input.key_down?(K_RIGHT) && (self.x + self.image.width <= Window.width - @@dx)
+
+		#上下移動に関して
+		dy = -@@dy if Input.key_down?(K_UP) && (self.y >= @@dy)
+		dy = @@dy if Input.key_down?(K_DOWN) && (self.y + self.image.height <= Window.height - @@dy)
+
+		self.x += dx
+		self.y += dy
 	end
 
 	#SHOOT_FLAMEの数だけフレームが変わったら弾を発射する
@@ -44,22 +58,20 @@ class Player < Sprite
 		@cnt += 1
 		if ((self.cnt = self.cnt % SHOOT_FLAME) == 0 && @@isShoot)
 			return Bullet.new(self.x + MOVE_CENTER, self.y)
-		else 
-			return nil
 		end
 	end
-
+	
 	def isShoot=(value)
 		@@isShoot = value
 	end
 
 	#自機が動けるかどうかを判定す
-	def isMove
-
+	def is_Move?
 	end
 
 	def hit(obj)
-		if obj.is_a?(Enemy_bullet) || obj.is_a?(Enemy)
+		if obj.is_a?(Enemy_Bullet) || obj.is_a?(Enemy_mini)
+			@@isShoot = false
 			self.vanish
 		end
 	end

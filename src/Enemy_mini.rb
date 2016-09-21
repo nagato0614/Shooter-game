@@ -1,30 +1,54 @@
-class Enemy_mini < Sprite
+#列挙対を扱えないので代わりにモジュールを使う
+module Motion
+	#動きを列挙体の用に扱う
+	NONE = 0 	#敵を出現させない
+	WAVE_RIGHT = 1	#波状に→ｋ方向に動く
+	WAVE_LEFT = 2		#左方向に動く
+	LENGTH_WISE = 3	#上から下に動く
+	CROSS_WIESE_RIGHT = 4 #右に向かって動く
+	CROSS_WIESE_LEFT = 5	#左に向かって動く
+	ARC = 5  #上端の角を中心とした弧を描きながら動く
+end
 
-	#敵機の出現するy座標
-	Y = -10
+class Enemy_mini < PlayerBase
+include Motion
 
 	#敵機が出現するタイミング
 	ENEMY_SPAWN_TIMING = 40
 
+	#waveでの振幅と周期
+	AMPLITUDE = 50
+	SITA = 30
+
+	#waveでの縦移動の基準となる座標
+	attr_accessor :wave_y
+	attr_accessor :wave_cnt
+
 	#敵機が進むスピード
-	ENEMY_SPEED = 3
+	attr_accessor :enemy_speed
 
 	#敵機の画像
 	@@images
 
 	#現在表示している画像の番号
 	attr_accessor :image_num
-	private :image_num=
+
+	#どのように動かすか
+	attr_accessor :motion
 
 	attr_accessor :isShot
 
-	def initialize
+	def initialize(x, y, motion, speed)
 		super
-		self.isShot = true
 		self.loadimage
-		#敵機を画面の中心付近に出現させる
-		self.x = rand(WIDTH - 48 / 2)
-		self.y = Y
+		self.isShot = true
+		self.x = x
+		self.wave_cnt = 0 - x
+		self.y = y
+		self.wave_y = y
+		self.motion = motion
+		self.enemy_speed = speed
+		self.visible = true
 	end
 
 	def loadimage
@@ -42,18 +66,61 @@ class Enemy_mini < Sprite
 				self.image_num = 0
 			end
 			self.image = @@images[self.image_num]
+		end
+
+	#弾を発射するメソッド
+	def shoot_bullet
+		if self.y >= 100 && self.isShot
+			self.isShot = false
+			return Enemy_Bullet.new(self.x, self.y, 90.0)
+		end
 	end
 
 	def update
 		self.change_image
-		self.y += ENEMY_SPEED
-		self.vanish if self.y > HEIGHT
+		case self.motion
+		when Motion::WAVE_RIGHT
+			self.wave_right
+		when Motion::WAVE_LEFT
+			self.wave_left
+		when Motion::LENGTH_WISE
+			self.length_wise
+		when Motion::CROSS_WIESE_RIGHT, Motion::CROSS_WIESE_LEFT
+			self.cross_wise
+		end
+
+		self.delete
 	end
 
 	def hit(obj)
 		if obj.is_a?(Player)
 			self.vanish
+		elsif obj.is_a?(Bullet)
+			self.vanish
 		end
 	end
 
+	def wave_right
+		self.x += self.enemy_speed
+		self.y = self.wave_y - Math.cos(self.wave_cnt / SITA) * AMPLITUDE
+		self.wave_cnt -= 0.5
+	end
+
+	def wave_left
+		self.x -= self.enemy_speed
+		self.y = self.wave_y - Math.cos(self.wave_cnt / SITA) * AMPLITUDE
+		self.wave_cnt += 0.5
+	end
+
+	def length_wise
+		self.y += self.enemy_speed
+	end
+
+	def cross_wise
+		if self.motion == Motion::CROSS_WIESE_RIGHT
+			self.x += self.enemy_speed
+		else
+			self.x -= self.enemy_speed
+		end
+	end
 end
