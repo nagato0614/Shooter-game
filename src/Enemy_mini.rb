@@ -85,6 +85,8 @@ include Motion
 			self.wave_left
 		when Motion::LENGTH_WISE
 			self.length_wise
+		when Motion::CROSS_WIESE_RIGHT, Motion::CROSS_WIESE_LEFT
+			self.cross_wise
 		end
 
 		self.delete
@@ -114,4 +116,11 @@ include Motion
 		self.y += self.enemy_speed
 	end
 
+	def cross_wise
+		if self.motion == Motion::CROSS_WIESE_RIGHT
+			self.x += self.enemy_speed
+		else
+			self.x -= self.enemy_speed
+		end
+	end
 end

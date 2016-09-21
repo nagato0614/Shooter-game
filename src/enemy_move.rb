@@ -38,6 +38,8 @@ include Motion
 				return self.wave(self.y_pos)
 			when Motion::LENGTH_WISE
 				return self.length_wise
+			when Motion::CROSS_WIESE_RIGHT, Motion::CROSS_WIESE_LEFT
+				return self.wave(self.y_pos)
 			end
 		end
 		return nil
@@ -76,5 +78,5 @@ include Motion
 														self.data[cnt]["speed"])
 		end
 		return buf
-	end
+	end	
 end
