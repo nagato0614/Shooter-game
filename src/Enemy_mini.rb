@@ -2,11 +2,11 @@
 module Motion
 	#動きを列挙体の用に扱う
 	NONE = 0 	#敵を出現させない
-	WAVE_RIGHT = 1	#波状に動く
-	WAVE_LEFT = 2
+	WAVE_RIGHT = 1	#波状に→ｋ方向に動く
+	WAVE_LEFT = 2		#左方向に動く
 	LENGTH_WISE = 3	#上から下に動く
-	CROSS_WIESE_RIGHT = 4 #右から左に動く
-	CROSS_WIESE_LEFT = 5
+	CROSS_WIESE_RIGHT = 4 #右に向かって動く
+	CROSS_WIESE_LEFT = 5	#左に向かって動く
 	ARC = 5  #上端の角を中心とした弧を描きながら動く
 end
 
@@ -82,6 +82,8 @@ include Motion
 		case self.motion
 		when Motion::WAVE_RIGHT
 			self.wave_right
+		when Motion::WAVE_LEFT
+			self.wave_left
 		end
 
 		self.delete
@@ -99,6 +101,12 @@ include Motion
 		self.x += self.enemy_speed
 		self.y = self.wave_y - Math.cos(self.wave_cnt / SITA) * AMPLITUDE
 		self.wave_cnt -= 0.5
+	end
+
+	def wave_left
+				self.x -= self.enemy_speed
+		self.y = self.wave_y - Math.cos(self.wave_cnt / SITA) * AMPLITUDE
+		self.wave_cnt += 0.5
 	end
 
 end

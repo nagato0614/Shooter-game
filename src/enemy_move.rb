@@ -43,7 +43,7 @@ include Motion
 		buf = []
 		if self.data[cnt]["motion"] != 0
 			self.data[cnt]["spown_num"].times do |i|
-				if self.data[cnt]["spown_pos_x"] <= Window.width
+				if self.data[cnt]["spown_pos_x"] <= Window.width / 2
 					buf << Enemy_mini.new(self.data[cnt]["spown_pos_x"] - i * INTERVAL,
 														self.data[cnt]["spown_pos_y"],
 														self.data[cnt]["motion"],
