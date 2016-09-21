@@ -32,16 +32,22 @@ include Motion
 	def spown_enemy(y)
 		if -y == self.data[self.y_pos]["y_pos"]
 			self.y_pos += 1
-			return  self.enemy(self.y_pos)
+			buf = []
+			case self.data[self.y_pos - 1]["motion"]
+			when Motion::WAVE_RIGHT, Motion::WAVE_LEFT
+				return self.wave(self.y_pos)
+			when Motion::LENGTH_WISE
+				return self.length_wise
+			end
 		end
 		return nil
 	end
 
 	#spown_enemy敵が出現する場合の処理
-	def enemy(y)
+	def wave(y)
 		cnt = (self.y_pos - 1)
 		buf = []
-		if self.data[cnt]["motion"] != 0
+	#	if self.data[cnt]["motion"] != 0
 			self.data[cnt]["spown_num"].times do |i|
 				if self.data[cnt]["spown_pos_x"] <= Window.width / 2
 					buf << Enemy_mini.new(self.data[cnt]["spown_pos_x"] - i * INTERVAL,
@@ -56,7 +62,19 @@ include Motion
 				end
 			end
 			return buf
+		#end
+		#return nil
+	end
+
+	def length_wise
+		cnt = (self.y_pos - 1)
+		buf = []
+		self.data[cnt]["spown_num"].times do |i|
+					buf << Enemy_mini.new(self.data[cnt]["spown_pos_x"],
+														self.data[cnt]["spown_pos_y"] - i * INTERVAL,
+														self.data[cnt]["motion"],
+														self.data[cnt]["speed"])
 		end
-		return nil
+		return buf
 	end
 end

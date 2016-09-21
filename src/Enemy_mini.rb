@@ -77,13 +77,14 @@ include Motion
 	end
 
 	def update
-		p [self.x, self.y.round]
 		self.change_image
 		case self.motion
 		when Motion::WAVE_RIGHT
 			self.wave_right
 		when Motion::WAVE_LEFT
 			self.wave_left
+		when Motion::LENGTH_WISE
+			self.length_wise
 		end
 
 		self.delete
@@ -104,9 +105,13 @@ include Motion
 	end
 
 	def wave_left
-				self.x -= self.enemy_speed
+		self.x -= self.enemy_speed
 		self.y = self.wave_y - Math.cos(self.wave_cnt / SITA) * AMPLITUDE
 		self.wave_cnt += 0.5
+	end
+
+	def length_wise
+		self.y += self.enemy_speed
 	end
 
 end
