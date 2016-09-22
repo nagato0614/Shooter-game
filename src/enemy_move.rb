@@ -55,12 +55,14 @@ include Motion
 					buf << Enemy_mini.new(self.data[cnt]["spown_pos_x"] - i * INTERVAL,
 														self.data[cnt]["spown_pos_y"],
 														self.data[cnt]["motion"],
-														self.data[cnt]["speed"])
+														self.data[cnt]["speed"],
+														self.data[cnt]["shot_time"])
 				else
 					buf << Enemy_mini.new(self.data[cnt]["spown_pos_x"] + i * INTERVAL,
 														self.data[cnt]["spown_pos_y"],
 														self.data[cnt]["motion"],
-														self.data[cnt]["speed"])
+														self.data[cnt]["speed"],
+														self.data[cnt]["shot_time"])
 				end
 			end
 			return buf
@@ -75,7 +77,8 @@ include Motion
 					buf << Enemy_mini.new(self.data[cnt]["spown_pos_x"],
 														self.data[cnt]["spown_pos_y"] - i * INTERVAL,
 														self.data[cnt]["motion"],
-														self.data[cnt]["speed"])
+														self.data[cnt]["speed"],
+														self.data[cnt]["shot_time"])
 		end
 		return buf
 	end	

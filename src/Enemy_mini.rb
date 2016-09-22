@@ -36,12 +36,16 @@ include Motion
 	#どのように動かすか
 	attr_accessor :motion
 
+	#弾を撃つタイミング操作
 	attr_accessor :isShot
+	attr_accessor :isShot2
+	attr_accessor :shot_timming
 
-	def initialize(x, y, motion, speed)
+	def initialize(x, y, motion, speed, stime)
 		super
 		self.loadimage
-		self.isShot = true
+		self.isShot = false
+		self.isShot2 = true
 		self.x = x
 		self.wave_cnt = 0 - x
 		self.y = y
@@ -49,6 +53,7 @@ include Motion
 		self.motion = motion
 		self.enemy_speed = speed
 		self.visible = true
+		self.shot_timming = stime
 	end
 
 	def loadimage
@@ -70,8 +75,9 @@ include Motion
 
 	#弾を発射するメソッド
 	def shoot_bullet
-		if self.y >= 100 && self.isShot
+		if self.isShot && self.isShot2
 			self.isShot = false
+			self.isShot2 = false
 			return Enemy_Bullet.new(self.x, self.y, 90.0)
 		end
 	end
@@ -81,20 +87,40 @@ include Motion
 		case self.motion
 		when Motion::WAVE_RIGHT
 			self.wave_right
+			self.shot_right
 		when Motion::WAVE_LEFT
 			self.wave_left
+			self.shot_left
 		when Motion::LENGTH_WISE
 			self.length_wise
-		when Motion::CROSS_WIESE_RIGHT, Motion::CROSS_WIESE_LEFT
+		when Motion::CROSS_WIESE_RIGHT
 			self.cross_wise
+			self.shot_right
+		when Motion::CROSS_WIESE_LEFT
+			self.cross_wise
+			self.shot_left
 		end
 
 		self.delete
 	end
 
+	#右に移動する敵の討つタイミングを調べる
+	def shot_right
+		if self.x >= self.shot_timming
+			self.isShot = true
+		end
+	end
+
+	#左に移動する敵の討つタイミングを調べる
+	def shot_left
+		if self.x <= Window.width - shot_timming
+			self.isShot = true
+		end		
+	end
+
 	def hit(obj)
 		if obj.is_a?(Player)
-			self.vanish
+			self.vanish 
 		elsif obj.is_a?(Bullet)
 			self.vanish
 		end

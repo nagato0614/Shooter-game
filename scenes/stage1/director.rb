@@ -54,6 +54,9 @@ module Stage1
 			#敵機を生成する
 			self.spown_enemy
 
+			#敵機がたまを　撃つ
+			self.enemy_shot
+
 			#自機が弾を発射する
 			self.shoot_player
 
@@ -73,7 +76,32 @@ module Stage1
 			Window.draw(0, 0, self.render)
 		end
 
-		#敵が弾を発射する
+		#敵が弾を発射
+		def enemy_shot
+			self.object.each do |obj|
+				if obj.is_a?(Array)
+					obj.each do |i|
+						if i.is_a?(Enemy_mini)
+							buf = i.shoot_bullet
+							if buf != nil
+								buf.target = self.render
+								self.object << buf
+							end
+						end
+					end
+				else
+					if obj.is_a?(Enemy_mini)
+						buf = i.shoot_bullet
+						if buf != nil
+							buf.target = self.render
+							self.object << buf
+						end
+					end
+				end
+			end
+		end
+
+		#敵を生成
 		def spown_enemy
 			buf = self.enemy_move.spown_enemy(self.map.background_y)
 			if buf != nil
