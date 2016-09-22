@@ -46,7 +46,6 @@ class Score
 
 	#引数で得られたオブジェクトに対応する点を得る
 	def set_score(name)
-		p name
 		if name == "Enemy_mini"
 			self.add_score(ENEMY)
 		end
@@ -64,4 +63,9 @@ class Score
 		end
 		return buf
 	end	 
+
+	#現在のステージのスコアを取得する
+	def get_score(s)
+		return self.score[now_stage]
+	end
 end
