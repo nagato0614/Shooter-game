@@ -15,8 +15,8 @@ class Player < Sprite
 	attr_accessor :cnt
 
 	#十字キーを押したときに進む割合（
-	@@dx = 2
-	@@dy = 2
+	@@dx = 4
+	@@dy = 4
 
 	def initialize(a = 0, b = 0)
 		super

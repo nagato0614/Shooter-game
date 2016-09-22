@@ -41,19 +41,19 @@ include Motion
 	attr_accessor :isShot2
 	attr_accessor :shot_timming
 
-	def initialize(x, y, motion, speed, stime)
+	def initialize(data, intervalx, intervaly)
 		super
 		self.loadimage
 		self.isShot = false
 		self.isShot2 = true
-		self.x = x
-		self.wave_cnt = 0 - x
-		self.y = y
-		self.wave_y = y
-		self.motion = motion
-		self.enemy_speed = speed
+		self.x = data["spown_pos_x"] + intervalx
+		self.wave_cnt = 0 - self.x
+		self.y = data["spown_pos_y"] + intervaly
+		self.wave_y = self.y
+		self.motion = data["motion"]
+		self.enemy_speed = data["speed"]
 		self.visible = true
-		self.shot_timming = stime
+		self.shot_timming = data["shot_time"]
 	end
 
 	def loadimage
