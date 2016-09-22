@@ -47,9 +47,13 @@ module Stage1
 			self.object.first.target = self.render
 
 			self.enemy_move = Enemy_move.new
+
+			Score.instance.change_stage(1)
 		end
 
 		def play
+			#時間による得点を追加する
+			Score.instance.set_time_score
 
 			#敵機を生成する
 			self.spown_enemy
