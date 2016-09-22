@@ -78,7 +78,7 @@ include Motion
 		if self.isShot && self.isShot2
 			self.isShot = false
 			self.isShot2 = false
-			return Enemy_Bullet.new(self.x, self.y, 90.0)
+			return Enemy_Bullet.new(self.x, self.y, self.image.width, self.image.height, 90.0)
 		end
 	end
 
