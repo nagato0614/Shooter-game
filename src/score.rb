@@ -45,8 +45,9 @@ class Score
 	end
 
 	#引数で得られたオブジェクトに対応する点を得る
-	def set_score(obj)
-		if obj.is_a?(Enemy_mini)
+	def set_score(name)
+		p name
+		if name == "Enemy_mini"
 			self.add_score(ENEMY)
 		end
 	end

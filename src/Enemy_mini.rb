@@ -122,6 +122,7 @@ include Motion
 		if obj.is_a?(Player)
 			self.vanish 
 		elsif obj.is_a?(Bullet)
+			Score.instance.set_score(self.class.name)
 			self.vanish
 		end
 	end
