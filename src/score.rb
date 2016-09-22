@@ -1,4 +1,7 @@
+require 'singleton'
+
 class Score
+	include Singleton
 
 	#存在するステージ数
 	STAGE = 8
@@ -42,14 +45,22 @@ class Score
 	end
 
 	#引数で得られたオブジェクトに対応する点を得る
-	def get_score(obj)
+	def set_score(obj)
 		if obj.is_a?(Enemy_mini)
 			self.add_score(ENEMY)
 		end
 	end
 
 	#時間経過によって得られるスコア
-	def get_time_score
+	def set_time_score
 		self.add_score(TIME)
 	end
+
+	def get_all_score
+		buf = 0
+		self.score.each do |i|
+			buf += i
+		end
+		return buf
+	end	 
 end
