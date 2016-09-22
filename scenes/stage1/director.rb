@@ -38,7 +38,7 @@ module Stage1
 
 		#ステージの最後まで到達したら数秒カウントして次のステージに移動できるかどうかの判定をする
 		attr_accessor :finish_cnt
-		FINITSH_TIME = 180
+		FINITSH_TIME = 100
 
 		def initialize
 			self.enemy_cnt = 0
