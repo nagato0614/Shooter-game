@@ -30,6 +30,9 @@ include Motion
 
 	#y座標に応じて敵機を出現させる。
 	def spown_enemy(y)
+		if self.y_pos >= self.data.size
+			return nil
+		end
 		if -y == self.data[self.y_pos]["y_pos"]
 			self.y_pos += 1
 			buf = []
