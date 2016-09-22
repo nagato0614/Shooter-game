@@ -65,7 +65,7 @@ class Score
 	end	 
 
 	#現在のステージのスコアを取得する
-	def get_score(s)
+	def get_score
 		return self.score[now_stage]
 	end
 end

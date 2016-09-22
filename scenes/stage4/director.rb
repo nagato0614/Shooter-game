@@ -6,7 +6,7 @@ require_relative '../../src/Expl'
 require_relative '../../src/Enemy_bullet'
 require_relative '../../src/map'
 
-module Stage1
+module Stage4
 	class Director
 
 		@@font = Font.new(15, "MS 明朝")
