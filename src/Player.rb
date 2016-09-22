@@ -4,9 +4,6 @@ class Player < Sprite
 	#このフレームごとに弾を発射する
 	SHOOT_FLAME = 10
 
-	#弾が発射される位置をプレイヤー機の中心にする
-	MOVE_CENTER = 7
-
 	#自機画像のサイズ
 	PLAYER_WIDTH = 35
 	PLAYER_HEIGHT = 31
@@ -57,7 +54,7 @@ class Player < Sprite
 	def shoot
 		@cnt += 1
 		if ((self.cnt = self.cnt % SHOOT_FLAME) == 0 && @@isShoot)
-			return Bullet.new(self.x + MOVE_CENTER, self.y)
+			return Bullet.new(self.x, self.y, self.image.width, self.image.height)
 		end
 	end
 	
