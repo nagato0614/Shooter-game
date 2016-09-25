@@ -6,14 +6,13 @@ require_relative '../../src/Expl'
 require_relative '../../src/Enemy_bullet'
 require_relative '../../src/map'
 
-module Stage1
+module Stage7
 	class Director
 
 		@@font = Font.new(15, "MS 明朝")
 
 		#このdirectorが扱うステージ
 		STAGE = 1
-
 		#敵が出現する間隔
 		#まだ敵が動く規則を決めていないのでランダム
 		ENEMY_SPOWN_TIMMING = 15
