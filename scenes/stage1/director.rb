@@ -118,7 +118,7 @@ module Stage1
 							buf = i.shoot_bullet
 							if buf != nil
 								buf.target = self.render
-								self.object << buf
+								self.object.unshift(buf)
 							end
 						end
 					end
@@ -127,7 +127,7 @@ module Stage1
 						buf = i.shoot_bullet
 						if buf != nil
 							buf.target = self.render
-							self.object << buf
+							self.object.unshift(buf)
 						end
 					end
 				end
@@ -141,17 +141,17 @@ module Stage1
 				buf.each do |obj|
 					obj.target = self.render
 				end
-				self.object << buf
+				self.object.unshift(buf)
 			end
 		end
 
 		#自機が弾を発射する
 		def shoot_player
-			if self.object.first.is_a?(Player)
-				bul = self.object.first.shoot
-				if bul.is_a?(Bullet)
-					self.object << bul
-					self.object.last.target = self.render
+			if self.object.last.is_a?(Player)
+				buf = self.object.last.shoot
+				if buf.is_a?(Bullet)
+					buf.target = self.render
+					self.object.unshift(buf)
 				end
 			end
 		end
