@@ -1,3 +1,6 @@
+require 'bundler'
+Bundler.require
+
 require 'dxruby'
 
 #初期設定
