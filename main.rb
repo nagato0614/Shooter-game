@@ -7,6 +7,7 @@ require 'dxruby'
 Window.width = 800
 Window.height = 600
 
+
 require_relative 'src/score'
 require_relative 'src/player_base'
 require_relative 'src/Player'
@@ -18,6 +19,7 @@ require_relative 'src/map'
 require_relative 'src/map'
 require_relative 'src/enemy_move'
 require_relative 'scene'
+require_relative 'src/director_base'
 require_relative 'load_scenes'
 
 Scene.set_current_scene(:title)
