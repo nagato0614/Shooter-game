@@ -15,8 +15,8 @@ class Player < Sprite
 	attr_accessor :cnt
 
 	#十字キーを押したときに進む割合（
-	@@dx = 4
-	@@dy = 4
+	DX = 4
+	DY = 4
 
 	def initialize(a = 0, b = 0)
 		super
@@ -39,12 +39,12 @@ class Player < Sprite
 		dx, dy = 0, 0
 		
 		#左右移動に関して
-		dx = -@@dx if Input.key_down?(K_LEFT) && (self.x >= @@dx)
-		dx = @@dx if Input.key_down?(K_RIGHT) && (self.x + self.image.width <= Window.width - @@dx)
+		dx = 	DX if Input.key_down?(K_LEFT) && (self.x >=	DX)
+		dx =	DX if Input.key_down?(K_RIGHT) && (self.x + self.image.width <= Window.width -	DX)
 
 		#上下移動に関して
-		dy = -@@dy if Input.key_down?(K_UP) && (self.y >= @@dy)
-		dy = @@dy if Input.key_down?(K_DOWN) && (self.y + self.image.height <= Window.height - @@dy)
+		dy = -DY if Input.key_down?(K_UP) && (self.y >= DY)
+		dy = DY if Input.key_down?(K_DOWN) && (self.y + self.image.height <= Window.height - DY)
 
 		self.x += dx
 		self.y += dy
