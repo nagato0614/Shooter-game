@@ -10,30 +10,20 @@ class Map
 	SCROLL_SPEED = 1
 
 	def initialize(num=nil)
-		self.map = []
 		if (num != nil)
-			map << Image.load(("images/map/stage" + num.to_s + ".jpg"))
-		else
-			read_map
+			self.map = Image.load(("images/map/stage" + num.to_s + ".jpg"))
 		end
 
 		#背景の座標を初期化
-		self.background_y = -map.first.height + Window.height
-	end
-
-	#背景を一度に読み込む関数
-	def read_map
-		8.times do |i|
-			map << Image.load(("images/map/stage" + (i + 1).to_s + ".jpg"))
-		end
+		self.background_y = -self.map.height + Window.height
 	end
 
 	def width
-		return map.first.width
+		return map.width
 	end
 
 	def height
-		return map.first.height
+		return map.height
 	end
 
 	def scroll

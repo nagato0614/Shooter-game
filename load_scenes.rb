@@ -7,6 +7,7 @@ require_relative 'scenes/stage5/director'
 require_relative 'scenes/stage6/director'
 require_relative 'scenes/stage7/director'
 require_relative 'scenes/stage8/director'
+require_relative 'scenes/end/director'
 
 Scene.add_scene(Title::Director.new, :title)
 Scene.add_scene(Stage1::Director.new, :stage1)

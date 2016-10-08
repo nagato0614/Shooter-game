@@ -12,7 +12,7 @@ module Stage2
 		@@font = Font.new(15, "MS 明朝")
 
 		#このdirectorが扱うステージ
-		STAGE = 1
+		attr_accessor :stage
 
 		#敵が出現する間隔
 		#まだ敵が動く規則を決めていないのでランダム
@@ -41,10 +41,11 @@ module Stage2
 		FINITSH_TIME = 100
 
 		def initialize
+			self.stage = 2
 			self.enemy_cnt = 0
 
 			#ステージ１の背景を読み込む
-			self.map = Map.new(STAGE)
+			self.map = Map.new(self.stage)
 
 			#RenderTargetの生成
 			self.render = RenderTarget.new(self.map.width, self.map.height)
@@ -57,7 +58,7 @@ module Stage2
 
 			self.finish_cnt = 0
 
-			Score.instance.change_stage(1)
+			Score.instance.change_stage(self.stage)
 		end
 
 		def play
@@ -77,7 +78,7 @@ module Stage2
 			self.map.scroll
 
 			#背景を描写する
-			self.render.draw(0, self.map.background_y, self.map.map[STAGE - 1])
+			self.render.draw(0, self.map.background_y, self.map.map)
 
 			#終了判定
 			self.finish_count
@@ -104,7 +105,8 @@ module Stage2
 		#次のステージに行けるかどうかを判定する
 		def next_stage
 			if Score.instance.get_score >= BORDER
-				Scene.set_current_scene(:stage2)
+				x = "stage" + (self.stage + 1).to_s
+				Scene.set_current_scene(x.to_sym)
 			else
 			end
 		end
