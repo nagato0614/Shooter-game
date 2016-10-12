@@ -47,7 +47,7 @@ class Boss < PlayerBase
 	def shoot
 		if self.shot_cnt % MINI == 0
 			sita = rand(30.0..150.0)
-			return Enemy_Bullet.new(self.x, self.y, self.image.width, self.image.height, sita)
+			return Enemy_Bullet.new(self.x, self.y + 30, self.image.width, self.image.height, sita)
 		elsif self.shot_cnt % LASER == 0
 			#まだできてない
 			return nil
