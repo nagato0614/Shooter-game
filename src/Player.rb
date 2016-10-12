@@ -24,6 +24,7 @@ class Player < Sprite
 		self.x = a - PLAYER_WIDTH / 2
 		self.y = b - PLAYER_HEIGHT / 2
 		self.cnt = 0
+		self.z = 3
 	end
 
 	def loadimage

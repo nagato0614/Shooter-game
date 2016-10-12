@@ -17,6 +17,7 @@ class Enemy_Bullet < PlayerBase
 		self.image = @@images[self.image_num]
 		self.x = a + (ex / 2) - self.image.width / 2
 		self.y = b + self.image.height
+		self.z = 50
 		self.angle = c * (Math::PI / 180.0)
 	end
 

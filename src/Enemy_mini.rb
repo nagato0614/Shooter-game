@@ -49,6 +49,7 @@ include Motion
 		self.x = data["spown_pos_x"] + intervalx
 		self.wave_cnt = 0 - self.x
 		self.y = data["spown_pos_y"] + intervaly
+		self.z = 75
 		self.wave_y = self.y
 		self.motion = data["motion"]
 		self.enemy_speed = data["speed"]

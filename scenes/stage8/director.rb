@@ -40,6 +40,12 @@ module Stage8
 		attr_accessor :finish_cnt
 		FINITSH_TIME = 100
 
+		#ボス出現フラグ
+		attr_accessor :boss_flag
+
+		#Bossクラスのインスタンスを格納する変数
+		attr_accessor :boss
+
 		def initialize
 			self.stage = 8
 			self.enemy_cnt = 0
@@ -59,6 +65,9 @@ module Stage8
 			self.finish_cnt = 0
 
 			Score.instance.change_stage(self.stage)
+		
+			self.boss_flag = true
+			self.boss = nil
 		end
 
 		def play
@@ -68,11 +77,18 @@ module Stage8
 			#敵機を生成する
 			self.spown_enemy
 
+
+			#ボスが弾を撃つ
+			self.boss_shot
+
 			#敵機がたまを　撃つ
 			self.enemy_shot
 
 			#自機が弾を発射する
 			self.shoot_player
+
+			#ボスを出現させる
+			self.spown_boss
 
 			#背景をスクロールさせる
 			self.map.scroll
@@ -89,8 +105,29 @@ module Stage8
 			Sprite.check(self.object, self.object)
 			Sprite.draw(self.object)
 
+			if self.boss != nil
+				Sprite.update(self.boss)
+				Sprite.check(self.object, self.boss)
+				Sprite.check(self.boss, self.object)
+				Sprite.draw(self.boss)
+			end 
+
 			#表示する範囲を設定する
 			Window.draw(0, 0, self.render)
+		end
+
+		def spown_boss
+			if self.map.background_y > -1000000 && self.boss_flag
+				@boss = Boss.new
+				self.boss_flag = false
+			end
+		end
+
+		def boss_shot
+			if @boss != nil
+				buf = @boss.shoot
+				self.object.unshift(buf) if buf != nil
+			end
 		end
 
 		def finish_count

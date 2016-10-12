@@ -73,7 +73,7 @@ module Stage1
 
 			#自機が弾を発射する
 			self.shoot_player
-
+			
 			#背景をスクロールさせる
 			self.map.scroll
 
