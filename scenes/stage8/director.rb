@@ -118,7 +118,7 @@ module Stage8
 
 		def spown_boss
 			if self.map.background_y > -1000000 && self.boss_flag
-				@boss = Boss.new(0, 0)
+				@boss = Boss.new
 				self.boss_flag = false
 			end
 		end

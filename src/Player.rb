@@ -68,7 +68,6 @@ class Player < Sprite
 	end
 
 	def hit(obj)
-		p obj
 		if obj.is_a?(Enemy_Bullet) || obj.is_a?(Enemy_mini)
 			@@isShoot = false
 			self.vanish

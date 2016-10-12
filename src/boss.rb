@@ -17,12 +17,12 @@ class Boss < PlayerBase
 	#弾を発射するタイミングをカウントする
 	attr_accessor :shot_cnt
 
-	def initialize(a, b)
+	def initialize(a=0, b=0)
 		super
 		self.image = Image.load('images/boss.png')
 		self.image.set_color_key(C_WHITE)
-		self.x = a
-		self.y = b
+		self.x = Window.width / 2 - self.image.width / 2
+		self.y = 0
 		self.z = 100
 
 		self.shot_cnt = 0
