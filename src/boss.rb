@@ -34,7 +34,6 @@ class Boss < PlayerBase
 		if obj.is_a?(Bullet)
 			self.hit_point -= 1
 			if self.hit_point < 0
-				p "vanish"
 				self.vanish
 			end
 		end

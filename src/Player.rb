@@ -24,6 +24,7 @@ class Player < Sprite
 		self.x = a - PLAYER_WIDTH / 2
 		self.y = b - PLAYER_HEIGHT / 2
 		self.cnt = 0
+		self.z = 3
 	end
 
 	def loadimage
@@ -67,6 +68,7 @@ class Player < Sprite
 	end
 
 	def hit(obj)
+		p obj
 		if obj.is_a?(Enemy_Bullet) || obj.is_a?(Enemy_mini)
 			@@isShoot = false
 			self.vanish
