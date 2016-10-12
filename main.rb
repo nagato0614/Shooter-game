@@ -9,6 +9,7 @@ Window.height = 600
 
 require_relative 'src/score'
 require_relative 'src/player_base'
+require_relative 'src/boss'
 require_relative 'src/Player'
 require_relative 'src/Bullet'
 require_relative 'src/Enemy_mini'

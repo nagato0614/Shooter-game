@@ -20,7 +20,8 @@ class Bullet < PlayerBase
 	def hit(obj)
 		if obj.is_a?(Enemy_mini)
 			self.vanish
+		elsif obj.is_a?(Boss)
+			self.vanish
 		end
 	end
-
 end
