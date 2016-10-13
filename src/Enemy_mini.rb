@@ -74,12 +74,15 @@ include Motion
 			self.image = @@images[self.image_num]
 		end
 
-	#弾を発射するメソッド
-	def shoot_bullet
+	#弾を発射するメソッド(引数はプレーヤーの座標)
+	def shoot_bullet(a, b)
 		if self.isShot && self.isShot2
 			self.isShot = false
 			self.isShot2 = false
-			return Enemy_Bullet.new(self.x, self.y, self.image.width, self.image.height, 90.0)
+			return Enemy_Bullet.new(self.x, self.y, 
+															self.image.width, self.image.height, 
+															90.0,
+															a, b)
 		end
 	end
 

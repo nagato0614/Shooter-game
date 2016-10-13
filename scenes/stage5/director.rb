@@ -83,6 +83,8 @@ module Stage5
 			#終了判定
 			self.finish_count
 
+			Scene.set_current_scene(:end) unless @object.last.is_a?(Player)
+
 			#オブジェクトの描画処理関係
 			Sprite.clean(self.object)
 			Sprite.update(self.object)
@@ -117,7 +119,7 @@ module Stage5
 				if obj.is_a?(Array)
 					obj.each do |i|
 						if i.is_a?(Enemy_mini)
-							buf = i.shoot_bullet
+							buf = i.shoot_bullet(self.object.last.x, self.object.last.y)
 							if buf != nil
 								buf.target = self.render
 								self.object.unshift(buf)
@@ -126,7 +128,7 @@ module Stage5
 					end
 				else
 					if obj.is_a?(Enemy_mini)
-						buf = i.shoot_bullet
+						buf = i.shoot_bullet(self.object.last.x, self.object.last.y)
 						if buf != nil
 							buf.target = self.render
 							self.object.unshift(buf)
