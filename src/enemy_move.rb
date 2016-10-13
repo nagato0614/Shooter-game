@@ -25,7 +25,6 @@ include Motion
 	#sagae.csvを読み込むメソッド
 	def load_data
 		str = "data/stage" + self.stage.to_s + ".csv"
-		p str
 		self.data = CSV.read(str, headers: true)
 		self.data.each do |i|
 			i.each do |j|

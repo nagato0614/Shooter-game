@@ -34,7 +34,4 @@ Window.loop do
 	end
 
 	Scene.play_scene
-
-	Window.draw_font(0, 0, Window.real_fps.to_s, font)
-	Window.draw_font(0, 15, Score.instance.get_all_score.to_s, font)
 end
