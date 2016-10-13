@@ -83,8 +83,6 @@ module Stage4
 			#終了判定
 			self.finish_count
 
-			Scene.set_current_scene(:end) unless @object.last.is_a?(Player)
-
 			#オブジェクトの描画処理関係
 			Sprite.clean(self.object)
 			Sprite.update(self.object)

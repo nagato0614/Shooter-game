@@ -70,6 +70,7 @@ class Player < Sprite
 	def hit(obj)
 		if obj.is_a?(Enemy_Bullet) || obj.is_a?(Enemy_mini)
 			@@isShoot = false
+			Scene.set_current_scene(:end)
 			self.vanish
 		end
 	end
