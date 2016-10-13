@@ -5,6 +5,7 @@ module Ending
 		end
 
 		def play
+
 		end
 		
 	end
