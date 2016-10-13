@@ -12,7 +12,11 @@ include Motion
 	#csvデータを格納する
 	attr_accessor :data
 
-	def initialize
+	#扱うステージ
+	attr_accessor :stage
+
+	def initialize(s)
+		self.stage = s
 		self.y_pos = 0
 		self.load_data
 	end
@@ -20,7 +24,9 @@ include Motion
 
 	#sagae.csvを読み込むメソッド
 	def load_data
-		self.data = CSV.read('data/stage1.csv', headers: true)
+		str = "data/stage" + self.stage.to_s + ".csv"
+		p str
+		self.data = CSV.read(str, headers: true)
 		self.data.each do |i|
 			i.each do |j|
 				j[1] = j[1].to_i

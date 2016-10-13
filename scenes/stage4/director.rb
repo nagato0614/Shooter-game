@@ -54,7 +54,7 @@ module Stage4
 			self.object << Player.new(Window.width / 2, Window.height * 2 / 3)
 			self.object.first.target = self.render
 
-			self.enemy_move = Enemy_move.new
+			self.enemy_move = Enemy_move.new(self.stage)
 
 			self.finish_cnt = 0
 

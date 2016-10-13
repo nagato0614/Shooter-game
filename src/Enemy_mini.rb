@@ -7,7 +7,7 @@ module Motion
 	LENGTH_WISE = 3	#上から下に動く
 	CROSS_WIESE_RIGHT = 4 #右に向かって動く
 	CROSS_WIESE_LEFT = 5	#左に向かって動く
-	ARC = 5  #上端の角を中心とした弧を描きながら動く
+	ARC = 6  #上端の角を中心とした弧を描きながら動く
 end
 
 class Enemy_mini < PlayerBase
