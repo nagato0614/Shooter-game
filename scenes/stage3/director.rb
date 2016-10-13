@@ -117,7 +117,7 @@ module Stage3
 				if obj.is_a?(Array)
 					obj.each do |i|
 						if i.is_a?(Enemy_mini)
-							buf = i.shoot_bullet
+							buf = i.shoot_bullet(self.object.last.x, self.object.last.y)
 							if buf != nil
 								buf.target = self.render
 								self.object.unshift(buf)
@@ -126,7 +126,7 @@ module Stage3
 					end
 				else
 					if obj.is_a?(Enemy_mini)
-						buf = i.shoot_bullet
+						buf = i.shoot_bullet(self.object.last.x, self.object.last.y)
 						if buf != nil
 							buf.target = self.render
 							self.object.unshift(buf)
